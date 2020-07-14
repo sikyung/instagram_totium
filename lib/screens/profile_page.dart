@@ -28,6 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _sideMenu() {
     return AnimatedContainer(
+      width: menuWidth,
       duration: Duration(milliseconds: duration),
       curve: Curves.easeInOut,
       color: Colors.grey[200],
@@ -35,6 +36,18 @@ class _ProfilePageState extends State<ProfilePage> {
         _menuOpened ? _size.width - menuWidth : _size.width,
         0,
         0,
+      ),
+      child: SafeArea(
+        child: SizedBox(
+          width: menuWidth,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              FlatButton(child: Text('시스템 관리'), onPressed: null ,)
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -52,22 +65,33 @@ class _ProfilePageState extends State<ProfilePage> {
       child: SafeArea(
         child: Column(
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Expanded(child: Padding(
-                  padding: const EdgeInsets.only(left:commond_gap),
-                  child: Text('시스템 환경설정', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                )),
-                IconButton(icon: Icon(Icons.menu),onPressed: (){
-                  setState(() {
-                    _menuOpened = !_menuOpened;
-                  });
-                },)
-              ],
-            )
+            _usernameIconButton()
           ],
         ),
       ),
     );
+  }
+
+  Row _usernameIconButton() {
+    return Row(
+            children: <Widget>[
+              Expanded(
+                  child: Padding(
+                padding: const EdgeInsets.only(left: commond_gap),
+                child: Text(
+                  '시스템 환경설정',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              )),
+              IconButton(
+                icon: Icon(Icons.menu),
+                onPressed: () {
+                  setState(() {
+                    _menuOpened = !_menuOpened;
+                  });
+                },
+              )
+            ],
+          );
   }
 }
