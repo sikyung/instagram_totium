@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagramtotium/constants/size.dart';
 import 'package:instagramtotium/screens/feed_page.dart';
 import 'package:instagramtotium/screens/profile_page.dart';
 
@@ -21,6 +22,9 @@ class _MainPageState extends State {
 
   @override
   Widget build(BuildContext context) {
+    if(size == null){
+      size = MediaQuery.of(context).size;
+    }
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
